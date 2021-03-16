@@ -109,45 +109,45 @@ static const char *fonts[]               = { "monospace:style=Bold:size=10", "No
 #if BAR_FLEXWINTITLE_PATCH
 static char c000000[]                    = "#000000"; // placeholder value
 #endif // BAR_FLEXWINTITLE_PATCH
-static char normfgcolor[]                = "#bbbbbb";
-static char normbgcolor[]                = "#222222";
-static char normbordercolor[]            = "#444444";
-static char normfloatcolor[]             = "#db8fd9";
+static char normfgcolor[]                = "#d8dee9";
+static char normbgcolor[]                = "#2e3440";
+static char normbordercolor[]            = "#2e3440";
+static char normfloatcolor[]             = "#2e3440";
 
-static char selfgcolor[]                 = "#eeeeee";
-static char selbgcolor[]                 = "#005577";
-static char selbordercolor[]             = "#005577";
-static char selfloatcolor[]              = "#005577";
+static char selfgcolor[]                 = "#eceff4";
+static char selbgcolor[]                 = "#81a1c1";
+static char selbordercolor[]             = "#81a1c1";
+static char selfloatcolor[]              = "#81a1c1";
 
-static char titlenormfgcolor[]           = "#bbbbbb";
-static char titlenormbgcolor[]           = "#222222";
-static char titlenormbordercolor[]       = "#444444";
-static char titlenormfloatcolor[]        = "#db8fd9";
+static char titlenormfgcolor[]           = "#d8dee9";
+static char titlenormbgcolor[]           = "#2e3440";
+static char titlenormbordercolor[]       = "#2e3440";
+static char titlenormfloatcolor[]        = "#2e3440";
 
-static char titleselfgcolor[]            = "#eeeeee";
-static char titleselbgcolor[]            = "#005577";
-static char titleselbordercolor[]        = "#005577";
-static char titleselfloatcolor[]         = "#005577";
+static char titleselfgcolor[]            = "#eceff4";
+static char titleselbgcolor[]            = "#81a1c1";
+static char titleselbordercolor[]        = "#81a1c1";
+static char titleselfloatcolor[]         = "#81a1c1";
 
-static char tagsnormfgcolor[]            = "#bbbbbb";
-static char tagsnormbgcolor[]            = "#222222";
-static char tagsnormbordercolor[]        = "#444444";
-static char tagsnormfloatcolor[]         = "#db8fd9";
+static char tagsnormfgcolor[]            = "#d8dee9";
+static char tagsnormbgcolor[]            = "#2e3440";
+static char tagsnormbordercolor[]        = "#2e3440";
+static char tagsnormfloatcolor[]         = "#2e3440";
 
-static char tagsselfgcolor[]             = "#eeeeee";
-static char tagsselbgcolor[]             = "#005577";
-static char tagsselbordercolor[]         = "#005577";
-static char tagsselfloatcolor[]          = "#005577";
+static char tagsselfgcolor[]             = "#eceff4";
+static char tagsselbgcolor[]             = "#81a1c1";
+static char tagsselbordercolor[]         = "#81a1c1";
+static char tagsselfloatcolor[]          = "#81a1c1";
 
-static char hidfgcolor[]                 = "#005577";
-static char hidbgcolor[]                 = "#222222";
-static char hidbordercolor[]             = "#005577";
-static char hidfloatcolor[]              = "#f76e0c";
+static char hidfgcolor[]                 = "#81a1c1";
+static char hidbgcolor[]                 = "#2e3440";
+static char hidbordercolor[]             = "#81a1c1";
+static char hidfloatcolor[]              = "#81a1c1";
 
-static char urgfgcolor[]                 = "#bbbbbb";
-static char urgbgcolor[]                 = "#222222";
-static char urgbordercolor[]             = "#ff0000";
-static char urgfloatcolor[]              = "#db8fd9";
+static char urgfgcolor[]                 = "#d8dee9";
+static char urgbgcolor[]                 = "#2e3440";
+static char urgbordercolor[]             = "#bf616a";
+static char urgfloatcolor[]              = "#bf616a";
 
 #if BAR_FLEXWINTITLE_PATCH
 static char normTTBbgcolor[]             = "#330000";
@@ -319,11 +319,11 @@ static const char *layoutmenu_cmd = "layoutmenu.sh";
 #if COOL_AUTOSTART_PATCH
 static const char *const autostart[] = {
 	"xset", "r", "rate", "300", "50", NULL,
-	"feh", "--no-fehbg", "--bg-fill", "~/wallpaper", NULL,
+	"sh", "-c", "feh --no-fehbg --bg-fill ~/wallpaper", NULL,
 	"nm-applet", NULL,
 	"picom", "-b", NULL,
 	"light-locker", NULL,
-	NULL /*", "terminate", "*/
+	NULL /* terminate */
 };
 #endif // COOL_AUTOSTART_PATCH
 
