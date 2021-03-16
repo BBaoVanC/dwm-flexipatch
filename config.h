@@ -5,7 +5,7 @@
 static const unsigned int borderpx       = 0;   /* border pixel of windows */
 static const int corner_radius           = 10;
 #else
-static const unsigned int borderpx       = 1;   /* border pixel of windows */
+static const unsigned int borderpx       = 4;   /* border pixel of windows */
 #endif // ROUNDED_CORNERS_PATCH
 static const unsigned int snap           = 32;  /* snap pixel */
 #if SWALLOW_PATCH
@@ -15,10 +15,10 @@ static const int swallowfloating         = 0;   /* 1 means swallow floating wind
 static int nomodbuttons                  = 1;   /* allow client mouse button bindings that have no modifier */
 #endif // NO_MOD_BUTTONS_PATCH
 #if VANITYGAPS_PATCH
-static const unsigned int gappih         = 20;  /* horiz inner gap between windows */
+static const unsigned int gappih         = 10;  /* horiz inner gap between windows */
 static const unsigned int gappiv         = 10;  /* vert inner gap between windows */
 static const unsigned int gappoh         = 10;  /* horiz outer gap between windows and screen edge */
-static const unsigned int gappov         = 30;  /* vert outer gap between windows and screen edge */
+static const unsigned int gappov         = 10;  /* vert outer gap between windows and screen edge */
 static const int smartgaps               = 0;   /* 1 means no outer gap when there is only one window */
 #endif // VANITYGAPS_PATCH
 #if AUTOSTART_PATCH
@@ -103,9 +103,8 @@ static void (*bartabmonfns[])(Monitor *) = { NULL /* , customlayoutfn */ };
 #if BAR_PANGO_PATCH
 static const char font[]                 = "monospace 10";
 #else
-static const char *fonts[]               = { "monospace:size=10" };
+static const char *fonts[]               = { "monospace:style=Bold:size=10", "Noto Color Emoji:style=Bold:size=10" };
 #endif // BAR_PANGO_PATCH
-static const char dmenufont[]            = "monospace:size=10";
 
 #if BAR_FLEXWINTITLE_PATCH
 static char c000000[]                    = "#000000"; // placeholder value
@@ -319,8 +318,12 @@ static const char *layoutmenu_cmd = "layoutmenu.sh";
 
 #if COOL_AUTOSTART_PATCH
 static const char *const autostart[] = {
-	"st", NULL,
-	NULL /* terminate */
+	"xset", "r", "rate", "300", "50", NULL,
+	"feh", "--no-fehbg", "--bg-fill", "~/wallpaper", NULL,
+	"nm-applet", NULL,
+	"picom", "-b", NULL,
+	"light-locker", NULL,
+	NULL /*", "terminate", "*/
 };
 #endif // COOL_AUTOSTART_PATCH
 
@@ -404,12 +407,20 @@ static const Rule rules[] = {
 	 *	WM_WINDOW_ROLE(STRING) = role
 	 *	_NET_WM_WINDOW_TYPE(ATOM) = wintype
 	 */
-	RULE(.wintype = WTYPE "DIALOG", .isfloating = 1)
-	RULE(.wintype = WTYPE "UTILITY", .isfloating = 1)
-	RULE(.wintype = WTYPE "TOOLBAR", .isfloating = 1)
-	RULE(.wintype = WTYPE "SPLASH", .isfloating = 1)
-	RULE(.class = "Gimp", .tags = 1 << 4)
-	RULE(.class = "Firefox", .tags = 1 << 7)
+	RULE(.wintype = WTYPE "DIALOG", .isfloating = 1) 
+	RULE(.wintype = WTYPE "UTILITY", .isfloating = 1) 
+	RULE(.wintype = WTYPE "TOOLBAR", .isfloating = 1) 
+	RULE(.wintype = WTYPE "SPLASH", .isfloating = 1) 
+
+	RULE(.class = "st", .isterminal = 1)
+	RULE(.class = "st-noswallow", .noswallow = 1)
+	RULE(.class = "st-floating", .isfloating = 1)
+	RULE(.class = "Steam", .instance = "Steam", .title = "Steam - News", .isfloating = 1)
+	RULE(.class = "Steam", .instance = "Steam", .title = "Friends List", .isfloating = 1)
+	RULE(.class = "Dragon-drag-and-drop", .isfloating = 1, .noswallow = 1)
+	RULE(.title = "Clipboard Editor", .isfloating = 1, .noswallow = 1)
+	RULE(.title = "Event Tester", .noswallow = 1)
+
 	#if SCRATCHPADS_PATCH
 	RULE(.instance = "spterm", .tags = SPTAG(0), .isfloating = 1)
 	#endif // SCRATCHPADS_PATCH
@@ -518,7 +529,7 @@ static const BarRule barrules[] = {
 };
 
 /* layout(s) */
-static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
+static const float mfact     = 0.50; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 #if FLEXTILE_DELUXE_LAYOUT
 static const int nstack      = 0;    /* number of clients in primary stack area */
@@ -738,7 +749,7 @@ static const char *dmenucmd[] = {
 	#if !NODMENU_PATCH
 	"-m", dmenumon,
 	#endif // NODMENU_PATCH
-	"-fn", dmenufont,
+	/* "-fn", dmenufont, */
 	"-nb", normbgcolor,
 	"-nf", normfgcolor,
 	"-sb", selbgcolor,

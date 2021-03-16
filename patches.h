@@ -26,7 +26,7 @@
  * Patch: https://gist.github.com/danbyl/54f7c1d57fc6507242a95b71c3d8fdea
  * dwmblocks: https://github.com/torrinfail/dwmblocks
  */
-#define BAR_DWMBLOCKS_PATCH 0
+#define BAR_DWMBLOCKS_PATCH 0 /* TODO: enable */
 
 /* This patch shows the titles of all visible windows in the status bar
  * (as opposed to showing only the selected one).
@@ -125,7 +125,7 @@
 /* The systray patch adds systray for the status bar.
  * https://dwm.suckless.org/patches/systray/
  */
-#define BAR_SYSTRAY_PATCH 0
+#define BAR_SYSTRAY_PATCH 1
 
 /* Show tag symbols in bar */
 #define BAR_TAGS_PATCH 1
@@ -229,7 +229,7 @@
  * dwm will crash on encountering such characters. Note that you will also need a font that
  * provides color emojis for this to work.
  */
-#define BAR_COLOR_EMOJI_PATCH 0
+#define BAR_COLOR_EMOJI_PATCH 1
 
 /* Updates the position of dmenu to match that of the bar. I.e. if topbar is 0 then dmenu
  * will appear at the bottom and if 1 then dmenu will appear at the top.
@@ -258,7 +258,7 @@
  * https://github.com/bakkeby/dwm-flexipatch/issues/50 (_IS_FLOATING patch)
  * https://dwm.suckless.org/patches/ewmhtags/
  */
-#define BAR_EWMHTAGS_PATCH 0
+#define BAR_EWMHTAGS_PATCH 1
 
 /* Allows the bar height to be explicitly set rather than being derived from font.
  * https://dwm.suckless.org/patches/bar_height/
@@ -268,7 +268,7 @@
 /* This patch prevents dwm from drawing tags with no clients (i.e. vacant) on the bar.
  * https://dwm.suckless.org/patches/hide_vacant_tags/
  */
-#define BAR_HIDEVACANTTAGS_PATCH 0
+#define BAR_HIDEVACANTTAGS_PATCH 0 /* TODO: enable */
 
 /* With this patch dwm's built-in status bar is only shown when HOLDKEY is pressed
  * and the bar will now overlay the display.
@@ -357,7 +357,7 @@
  * This patch takes precedence over ATTACHASIDE_PATCH.
  * https://dwm.suckless.org/patches/attachabove/
  */
-#define ATTACHABOVE_PATCH 0
+#define ATTACHABOVE_PATCH 1
 
 /* This patch adds new clients on top of the stack.
  * This patch takes precedence over ATTACHBELOW_PATCH.
@@ -388,7 +388,7 @@
  * get resized/moved. With this patch, they will.
  * https://dwm.suckless.org/patches/autoresize/
  */
-#define AUTORESIZE_PATCH 0
+#define AUTORESIZE_PATCH 1
 
 /* This patch adds an iscentered rule to automatically center clients on the current monitor.
  * This patch takes precedence over centeredwindowname and fancybar patches.
@@ -411,13 +411,13 @@
 /* As above, except that the transient window is centered within the position of the parent
  * window, rather than at the center of the screen. This takes precedence over the above patch.
  */
-#define CENTER_TRANSIENT_WINDOWS_BY_PARENT_PATCH 0
+#define CENTER_TRANSIENT_WINDOWS_BY_PARENT_PATCH 1
 
 /* This patch provides the ability to assign different weights to clients in their
  * respective stack in tiled layout.
  * https://dwm.suckless.org/patches/cfacts/
  */
-#define CFACTS_PATCH 0
+#define CFACTS_PATCH 1
 
 /* This patch allows color attributes to be set through the command line.
  * https://dwm.suckless.org/patches/cmdcustomize/
@@ -435,7 +435,7 @@
  * then all processes from autostart array will be killed.
  * https://dwm.suckless.org/patches/cool_autostart/
  */
-#define COOL_AUTOSTART_PATCH 0
+#define COOL_AUTOSTART_PATCH 1
 
 /* The cyclelayouts patch lets you cycle through all your layouts.
  * https://dwm.suckless.org/patches/cyclelayouts/
@@ -449,12 +449,12 @@
  * like chromium (with "Use system title bar and borders" turned off) or vlc in fullscreen mode.
  * https://dwm.suckless.org/patches/decoration_hints/
  */
-#define DECORATION_HINTS_PATCH 0
+#define DECORATION_HINTS_PATCH 1
 
 /* Similarly to the dragmfact patch this allows you to click and drag clients to change the
  * cfact to adjust the client's size in the stack. This patch depends on the cfacts patch.
  */
-#define DRAGCFACT_PATCH 0
+#define DRAGCFACT_PATCH 1
 
 /* This patch lets you resize the split in the tile layout (i.e. modify mfact) by holding
  * the modkey and dragging the mouse.
@@ -500,7 +500,7 @@
  * Also see the selectivefakefullscreen option that adds a rule option to enabled this on client
  * startup.
  */
-#define FAKEFULLSCREEN_CLIENT_PATCH 0
+#define FAKEFULLSCREEN_CLIENT_PATCH 1
 
 /* This patch adds a float rule allowing the size and position of floating windows to be specified
  * It also allows the size and position of floating windows to be controlled similar to the
@@ -725,7 +725,7 @@
  * monitor (default).
  * https://dwm.suckless.org/patches/pertag/
  */
-#define PERTAG_PATCH 0
+#define PERTAG_PATCH 1
 
 /* This controls whether or not to also store bar position on a per
  * tag basis, or leave it as one bar per monitor.
@@ -778,7 +778,7 @@
  * Additionally dwm can quit cleanly by using kill -TERM dwmpid.
  * https://dwm.suckless.org/patches/restartsig/
  */
-#define RESTARTSIG_PATCH 0
+#define RESTARTSIG_PATCH 1
 
 /* Adds rio-like drawing to resize the selected client.
  * This depends on an external tool slop being installed.
@@ -909,7 +909,7 @@
  *
  * https://github.com/bakkeby/patches/wiki/steam
  */
-#define STEAM_PATCH 0
+#define STEAM_PATCH 1
 
 /* Adds toggleable keyboard shortcut to make a client 'sticky', i.e. visible on all tags.
  * https://dwm.suckless.org/patches/sticky/
@@ -931,7 +931,7 @@
  *
  * https://dwm.suckless.org/patches/swallow/
  */
-#define SWALLOW_PATCH 0
+#define SWALLOW_PATCH 1
 
 /* This patch depends on the pertag patch and makes it possible to switch focus with a single
  * shortcut (MOD+s) instead of having to think if you should use mod-j or mod-k for reaching
@@ -1051,7 +1051,7 @@
  * https://github.com/bakkeby/patches/blob/master/dwm/dwm-vanitygaps-6.2.diff
  * https://github.com/bakkeby/patches/blob/master/dwm/dwm-cfacts-vanitygaps-6.2.diff
  */
-#define VANITYGAPS_PATCH 0
+#define VANITYGAPS_PATCH 1
 
 /* This patch adds outer gaps for the monocle layout.
  * Most gaps patches tries to avoid gaps on the monocle layout, as it is often used as a
