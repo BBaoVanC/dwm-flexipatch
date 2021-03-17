@@ -775,6 +775,9 @@ static Key on_empty_keys[] = {
 };
 #endif // ON_EMPTY_KEYS_PATCH
 
+#include <X11/XF86keysym.h>
+#include "keybind_commands.h"
+
 static Key keys[] = {
 	/* modifier                     key            function                argument */
 	#if KEYMODES_PATCH
@@ -1140,6 +1143,41 @@ static Key keys[] = {
 	TAGKEYS(                        XK_7,                                  6)
 	TAGKEYS(                        XK_8,                                  7)
 	TAGKEYS(                        XK_9,                                  8)
+
+	/*    CUSTOM KEYBINDS    */
+	{ MODKEY|ShiftMask,             XK_m,       spawn,  { .v = supermenucmd } },
+        { MODKEY|ShiftMask,             XK_p,       spawn,  { .v = powermenucmd } },
+        { MODKEY|ShiftMask,             XK_l,       spawn,  { .v = lightlocker_lockcmd } },
+
+        { Mod4Mask,                     XK_a,       spawn,  { .v = alacrittycmd } },
+        { Mod4Mask,                     XK_k,       spawn,  { .v = kittycmd } },
+        { Mod4Mask,                     XK_c,       spawn,  { .v = clipeditcmd } },
+        { Mod4Mask,                     XK_f,       spawn,  { .v = browsercmd } },
+        { Mod4Mask,                     XK_d,       spawn,  { .v = discordcmd } },
+        { Mod4Mask,                     XK_m,       spawn,  { .v = mailclientcmd } },
+        { Mod4Mask,                     XK_r,       spawn,  { .v = filemanagercmd } },
+        { Mod4Mask,                     XK_n,       spawn,  { .v = rssreadercmd } },
+        { Mod4Mask,                     XK_p,       spawn,  { .v = passmenucmd } },
+
+        { Mod4Mask,                     XK_Escape,  spawn,  { .v = dunstclosecmd } },
+        { Mod4Mask|ShiftMask,           XK_Escape,  spawn,  { .v = dunstcloseallcmd } },
+        { Mod4Mask,                     XK_grave,   spawn,  { .v = dunsthistorycmd } },
+        { Mod4Mask|ShiftMask,           XK_period,  spawn,  { .v = dunstcontextcmd } },
+
+        { Mod4Mask,                     XK_u,       spawn,  { .v = imupdragcmd } },
+        { Mod4Mask|ShiftMask,           XK_u,       spawn,  { .v = imupclipcmd } },
+
+        { Mod4Mask|MODKEY,              XK_z,       spawn,  { .v = uskbdcmd } },
+        { Mod4Mask|MODKEY,              XK_x,       spawn,  { .v = intlkbdcmd } },
+
+        { 0,                            XK_Print,   spawn,  { .v = ss_sel } },
+        { ControlMask,                  XK_Print,   spawn,  { .v = ss_window } },
+        { ControlMask|ShiftMask,        XK_Print,   spawn,  { .v = ss_full } },
+        { Mod4Mask,                     XK_g,       spawn,  { .v = clipgimpcmd } },
+
+        { 0,                      XF86XK_AudioMute, spawn,  { .v = voltogglecmd } },
+        { 0,               XF86XK_AudioRaiseVolume, spawn,  { .v = volupcmd } },
+        { 0,               XF86XK_AudioLowerVolume, spawn,  { .v = voldowncmd } },
 };
 
 #if KEYMODES_PATCH
