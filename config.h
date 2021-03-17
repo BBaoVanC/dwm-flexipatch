@@ -1147,7 +1147,7 @@ static Key keys[] = {
 	/*    CUSTOM KEYBINDS    */
 	{ MODKEY|ShiftMask,             XK_m,       spawn,  { .v = supermenucmd } },
         { MODKEY|ShiftMask,             XK_p,       spawn,  { .v = powermenucmd } },
-        { MODKEY|ShiftMask,             XK_l,       spawn,  { .v = lightlocker_lockcmd } },
+        { Mod4Mask|ShiftMask,           XK_l,       spawn,  { .v = lightlocker_lockcmd } },
 
         { Mod4Mask,                     XK_a,       spawn,  { .v = alacrittycmd } },
         { Mod4Mask,                     XK_k,       spawn,  { .v = kittycmd } },
