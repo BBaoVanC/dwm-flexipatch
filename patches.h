@@ -1026,7 +1026,7 @@
 /* This patch allows you to toggle fullscreen on and off using a single shortcut key.
  * https://github.com/bakkeby/patches/blob/master/dwm/dwm-togglefullscreen-6.2.diff
  */
-#define TOGGLEFULLSCREEN_PATCH 0
+#define TOGGLEFULLSCREEN_PATCH 1
 
 /* Lets you transfer the currently focused client between the master and stack area
  * while increasing or decreasing the master area (nmaster) accordingly.
