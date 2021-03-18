@@ -20,8 +20,8 @@ static const char *dunstcontextcmd[] = { "dunstctl", "context", NULL };
 static const char *imupdragcmd[] = { "imupdrag", "url", NULL };
 static const char *imupclipcmd[] = { "imupclip", "url", NULL };
 
-static const char *uskbdcmd[] = { "setxkbmap", "-layout", "us", NULL };
-static const char *intlkbdcmd[] = { "setxkbmap", "-layout", "us", "-variant", "altgr-intl", NULL };
+static const char *uskbdcmd[] = { "/bin/sh", "-c", "setxkbmap -layout us && sigdwmblocks 2", NULL };
+static const char *intlkbdcmd[] = { "/bin/sh", "-c", "setxkbmap -layout us -variant altgr-intl && sigdwmblocks 2", NULL };
 
 static const char *ss_sel[] = { "ssclip", "sel", NULL };
 static const char *ss_window[] = { "ssclip", "window", NULL };

@@ -323,6 +323,8 @@ static const char *const autostart[] = {
 	"nm-applet", NULL,
 	"picom", "-b", NULL,
 	"light-locker", NULL,
+	"dwmblocks", NULL,
+	"pulse.daemon", NULL,
 	NULL /* terminate */
 };
 #endif // COOL_AUTOSTART_PATCH
