@@ -146,8 +146,8 @@ static char hidfloatcolor[]              = "#81a1c1";
 
 static char urgfgcolor[]                 = "#d8dee9";
 static char urgbgcolor[]                 = "#2e3440";
-static char urgbordercolor[]             = "#bf616a";
-static char urgfloatcolor[]              = "#bf616a";
+static char urgbordercolor[]             = "#eceff4";
+static char urgfloatcolor[]              = "#eceff4";
 
 #if BAR_FLEXWINTITLE_PATCH
 static char normTTBbgcolor[]             = "#330000";
