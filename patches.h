@@ -1032,7 +1032,7 @@
  * while increasing or decreasing the master area (nmaster) accordingly.
  * https://dwm.suckless.org/patches/transfer/
  */
-#define TRANSFER_PATCH 0
+#define TRANSFER_PATCH 1
 
 /* Lets you transfer all clients between the master and stack area
  * while increasing or decreasing the master area (nmaster) accordingly.
