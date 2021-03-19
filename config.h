@@ -1147,6 +1147,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_9,                                  8)
 
 	/*    CUSTOM KEYBINDS    */
+	{ MODKEY|ControlMask,           XK_l,       layoutmenu,     {0} },
 	{ MODKEY|ShiftMask,             XK_m,       spawn,  { .v = supermenucmd } },
         { MODKEY|ShiftMask,             XK_p,       spawn,  { .v = powermenucmd } },
         { Mod4Mask|ShiftMask,           XK_l,       spawn,  { .v = lightlocker_lockcmd } },
