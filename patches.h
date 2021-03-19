@@ -26,7 +26,7 @@
  * Patch: https://gist.github.com/danbyl/54f7c1d57fc6507242a95b71c3d8fdea
  * dwmblocks: https://github.com/torrinfail/dwmblocks
  */
-#define BAR_DWMBLOCKS_PATCH 0 /* TODO: enable */
+#define BAR_DWMBLOCKS_PATCH 1
 
 /* This patch shows the titles of all visible windows in the status bar
  * (as opposed to showing only the selected one).
@@ -102,7 +102,7 @@
  * when clicking the status bar. Refer to the website for usage.
  * https://dwm.suckless.org/patches/statuscmd/
  */
-#define BAR_STATUSCMD_PATCH 0
+#define BAR_STATUSCMD_PATCH 1
 
 /* Status2d allows colors and rectangle drawing in your dwm status bar.
  * This patch is incompatible with the statuscolors patch which takes precedence.
