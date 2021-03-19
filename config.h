@@ -1146,6 +1146,10 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                                  7)
 	TAGKEYS(                        XK_9,                                  8)
 
+	/*    LAYOUT KEYBINDS    */
+        { MODKEY|ShiftMask,             XK_t,       setlayout,      { .v = &layouts[3] } },
+        { MODKEY,                       XK_c,       setlayout,      { .v = &layouts[4] } },
+
 	/*    CUSTOM KEYBINDS    */
 	{ MODKEY|ControlMask,           XK_l,       layoutmenu,     {0} },
 	{ MODKEY|ShiftMask,             XK_m,       spawn,  { .v = supermenucmd } },
