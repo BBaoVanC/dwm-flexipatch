@@ -1180,6 +1180,7 @@ static Key keys[] = {
 
         { 0,                            XK_Print,   spawn,  { .v = ss_sel } },
         { ControlMask,                  XK_Print,   spawn,  { .v = ss_window } },
+	{ ShiftMask,			XK_Print,   spawn,  { .v = monitorshotcmd } },
         { ControlMask|ShiftMask,        XK_Print,   spawn,  { .v = ss_full } },
         { Mod4Mask,                     XK_g,       spawn,  { .v = clipgimpcmd } },
 

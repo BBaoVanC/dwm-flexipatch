@@ -26,6 +26,7 @@ static const char *intlkbdcmd[] = { "/bin/sh", "-c", "setxkbmap -layout us -vari
 static const char *ss_sel[] = { "ssclip", "sel", NULL };
 static const char *ss_window[] = { "ssclip", "window", NULL };
 static const char *ss_full[] = { "ssclip", "full", NULL };
+static const char *monitorshotcmd[] = { "monitorshot2.sh", NULL };
 static const char *clipgimpcmd[] = { "clipgimp", NULL };
 
 static const char *voltogglecmd[] = { "audioctl", "toggle", NULL };
