@@ -325,6 +325,7 @@ static const char *const autostart[] = {
 	"light-locker", NULL,
 	"dwmblocks", NULL,
 	"pulse.daemon", NULL,
+	"transd", NULL,
 	NULL /* terminate */
 };
 #endif // COOL_AUTOSTART_PATCH
