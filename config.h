@@ -1158,6 +1158,7 @@ static Key keys[] = {
         { MODKEY|ShiftMask,             XK_p,       spawn,  { .v = powermenucmd } },
         { Mod4Mask|ShiftMask,           XK_l,       spawn,  { .v = lightlocker_lockcmd } },
 
+        { Mod4Mask,                     XK_s,       spawn,  { .v = stcmd } },
         { Mod4Mask,                     XK_a,       spawn,  { .v = alacrittycmd } },
         { Mod4Mask,                     XK_k,       spawn,  { .v = kittycmd } },
         { Mod4Mask,                     XK_c,       spawn,  { .v = clipeditcmd } },

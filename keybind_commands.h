@@ -2,6 +2,7 @@ static const char *supermenucmd[] = { "supermenu", NULL };
 static const char *powermenucmd[] = { "powermenu", NULL };
 static const char *lightlocker_lockcmd[] = { "light-locker-command", "-l", NULL };
 
+static const char *stcmd[] = { "st", NULL };
 static const char *alacrittycmd[] = { "alacritty", NULL };
 static const char *kittycmd[] = { "kitty", NULL };
 static const char *clipeditcmd[] = { "clipedit", NULL };
