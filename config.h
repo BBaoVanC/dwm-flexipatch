@@ -326,6 +326,7 @@ static const char *const autostart[] = {
 	"dwmblocks", NULL,
 	"pulse.daemon", NULL,
 	"transd", NULL,
+	"swapmonitor.sh", NULL,
 	NULL /* terminate */
 };
 #endif // COOL_AUTOSTART_PATCH
