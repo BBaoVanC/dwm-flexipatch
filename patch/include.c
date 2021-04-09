@@ -112,6 +112,9 @@
 #if DECORATION_HINTS_PATCH
 #include "decorationhints.c"
 #endif
+#if DISTRIBUTETAGS_PATCH
+#include "distributetags.c"
+#endif
 #if DRAGCFACT_PATCH && CFACTS_PATCH
 #include "dragcfact.c"
 #endif
@@ -268,6 +271,9 @@
 #if TAGSWAPMON_PATCH
 #include "tagswapmon.c"
 #endif
+#if TAPRESIZE_PATCH
+#include "tapresize.c"
+#endif
 #if TOGGLEFULLSCREEN_PATCH
 #include "togglefullscreen.c"
 #endif
@@ -291,6 +297,9 @@
 #endif
 #if ZOOMSWAP_PATCH
 #include "zoomswap.c"
+#endif
+#if XKB_PATCH
+#include "xkb.c"
 #endif
 #if XRDB_PATCH && !BAR_VTCOLORS_PATCH
 #include "xrdb.c"
