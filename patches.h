@@ -346,12 +346,6 @@
  */
 #define ASPECTRESIZE_PATCH 0
 
-/* This patch prevents the focus to drift from the active fullscreen client when
- * using focusstack().
- * https://dwm.suckless.org/patches/alwaysfullscreen/
- */
-#define ALWAYSFULLSCREEN_PATCH 0
-
 /* This patch adds new clients above the selected client, instead of always
  * becoming the new master. This behaviour is known from Xmonad.
  * This patch takes precedence over ATTACHASIDE_PATCH.
@@ -450,6 +444,12 @@
  * https://dwm.suckless.org/patches/decoration_hints/
  */
 #define DECORATION_HINTS_PATCH 1
+
+/* This feature distributes all clients on the current monitor evenly across all tags.
+ * It is a variant of the reorganizetags patch.
+ * https://dwm.suckless.org/patches/reorganizetags/
+ */
+#define DISTRIBUTETAGS_PATCH 0
 
 /* Similarly to the dragmfact patch this allows you to click and drag clients to change the
  * cfact to adjust the client's size in the stack. This patch depends on the cfacts patch.
@@ -726,6 +726,11 @@
  * https://dwm.suckless.org/patches/pertag/
  */
 #define PERTAG_PATCH 1
+
+/* Option to store gaps on a per tag basis rather than on a per monitor basis.
+ * Depends on both pertag and vanitygaps patches being enabled.
+ */
+#define PERTAG_VANITYGAPS_PATCH 0
 
 /* This controls whether or not to also store bar position on a per
  * tag basis, or leave it as one bar per monitor.
@@ -1023,6 +1028,13 @@
  */
 #define TAGSWAPMON_PATCH 0
 
+/* This patch can be useful to the touchpad users because it allows to
+ * resize windows using Mod + two-finger scroll. It is useful when
+ * two-finger scrolling is configured in libinput.
+ * https://dwm.suckless.org/patches/tapresize/
+ */
+#define TAPRESIZE_PATCH 0
+
 /* This patch allows you to toggle fullscreen on and off using a single shortcut key.
  * https://github.com/bakkeby/patches/blob/master/dwm/dwm-togglefullscreen-6.2.diff
  */
@@ -1092,6 +1104,13 @@
  * http://dwm.suckless.org/patches/winview/
  */
 #define WINVIEW_PATCH 0
+
+/* Remember keyboard layout per client.
+ * It is recommended that you configure xkb before using this patch as described in
+ * https://www.x.org/archive/X11R7.5/doc/input/XKB-Config.html
+ * https://dwm.suckless.org/patches/xkb/
+ */
+#define XKB_PATCH 0
 
 /* Allows dwm to read colors from xrdb (.Xresources) during runtime. Compatible with
  * the float border color, awesomebar, urgentborder and titlecolor patches.
