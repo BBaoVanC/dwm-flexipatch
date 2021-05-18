@@ -502,7 +502,7 @@ typedef struct {
 	int iscentered;
 	#endif // CENTER_PATCH
 	int isfloating;
-	#if SELECTIVEFAKEFULLSCREEN_PATCH && FAKEFULLSCREEN_CLIENT_PATCH
+	#if SELECTIVEFAKEFULLSCREEN_PATCH && FAKEFULLSCREEN_CLIENT_PATCH && !FAKEFULLSCREEN_PATCH
 	int isfakefullscreen;
 	#endif // SELECTIVEFAKEFULLSCREEN_PATCH
 	#if ISPERMANENT_PATCH
@@ -539,7 +539,7 @@ typedef struct {
 #else
 #define PERMANENT
 #endif // ISPERMANENT_PATCH
-#if SELECTIVEFAKEFULLSCREEN_PATCH && FAKEFULLSCREEN_CLIENT_PATCH
+#if SELECTIVEFAKEFULLSCREEN_PATCH && FAKEFULLSCREEN_CLIENT_PATCH && !FAKEFULLSCREEN_PATCH
 #define FAKEFULLSCREEN , .isfakefullscreen = 1
 #else
 #define FAKEFULLSCREEN
@@ -846,7 +846,7 @@ applyrules(Client *c)
 			#if ISPERMANENT_PATCH
 			c->ispermanent = r->ispermanent;
 			#endif // ISPERMANENT_PATCH
-			#if SELECTIVEFAKEFULLSCREEN_PATCH && FAKEFULLSCREEN_CLIENT_PATCH
+			#if SELECTIVEFAKEFULLSCREEN_PATCH && FAKEFULLSCREEN_CLIENT_PATCH && !FAKEFULLSCREEN_PATCH
 			c->fakefullscreen = r->isfakefullscreen;
 			#endif // SELECTIVEFAKEFULLSCREEN_PATCH
 			#if SWALLOW_PATCH
@@ -1066,6 +1066,11 @@ buttonpress(XEvent *e)
 	const BarRule *br;
 	BarArg carg = { 0, 0, 0, 0 };
 	click = ClkRootWin;
+
+	#if BAR_STATUSCMD_PATCH && !BAR_DWMBLOCKS_PATCH
+	*lastbutton = '0' + ev->button;
+	#endif // BAR_STATUSCMD_PATCH | BAR_DWMBLOCKS_PATCH
+
 	/* focus monitor if necessary */
 	if ((m = wintomon(ev->window)) && m != selmon
 		#if FOCUSONCLICK_PATCH
@@ -1178,6 +1183,8 @@ cleanup(void)
 		cleanupmon(mons);
 	#if BAR_SYSTRAY_PATCH
 	if (showsystray && systray) {
+		while (systray->icons)
+			removesystrayicon(systray->icons);
 		if (systray->win) {
 			XUnmapWindow(dpy, systray->win);
 			XDestroyWindow(dpy, systray->win);
@@ -1236,6 +1243,9 @@ cleanupmon(Monitor *mon)
 	XUnmapWindow(dpy, mon->tabwin);
 	XDestroyWindow(dpy, mon->tabwin);
 	#endif // TAB_PATCH
+	#if PERTAG_PATCH
+	free(mon->pertag);
+	#endif // PERTAG_PATCH
 	free(mon);
 }
 
@@ -1298,7 +1308,7 @@ clientmessage(XEvent *e)
 	if (cme->message_type == netatom[NetWMState]) {
 		if (cme->data.l[1] == netatom[NetWMFullscreen]
 		|| cme->data.l[2] == netatom[NetWMFullscreen]) {
-			#if FAKEFULLSCREEN_CLIENT_PATCH
+			#if FAKEFULLSCREEN_CLIENT_PATCH && !FAKEFULLSCREEN_PATCH
 			if (c->fakefullscreen == 2 && c->isfullscreen)
 				c->fakefullscreen = 3;
 			#endif // FAKEFULLSCREEN_CLIENT_PATCH
@@ -1554,6 +1564,7 @@ createmon(void)
 			n = MAX(br->bar, n);
 	}
 
+	m->bar = NULL;
 	for (i = 0; i <= n && i < max_bars; i++) {
 		bar = ecalloc(1, sizeof(Bar));
 		bar->mon = m;
@@ -1991,6 +2002,9 @@ focusstack(const Arg *arg)
 	#if LOSEFULLSCREEN_PATCH
 	if (!selmon->sel)
 		return;
+	#elif FAKEFULLSCREEN_CLIENT_PATCH && !FAKEFULLSCREEN_PATCH
+	if (!selmon->sel || (selmon->sel->isfullscreen && !selmon->sel->fakefullscreen))
+		return;
 	#else
 	if (!selmon->sel || selmon->sel->isfullscreen)
 		return;
@@ -2332,7 +2346,7 @@ manage(Window w, XWindowAttributes *wa)
 		c->y = c->mon->my + c->mon->mh - HEIGHT(c);
 	c->x = MAX(c->x, c->mon->mx);
 	/* only fix client y-offset, if the client center might cover the bar */
-	c->y = MAX(c->y, ((c->mon->bar->by == c->mon->my) && (c->x + (c->w / 2) >= c->mon->wx)
+	c->y = MAX(c->y, ((!c->mon->bar || c->mon->bar->by == c->mon->my) && (c->x + (c->w / 2) >= c->mon->wx)
 		&& (c->x + (c->w / 2) < c->mon->wx + c->mon->ww)) ? bh : c->mon->my);
 
 	wc.border_width = c->bw;
@@ -2344,9 +2358,7 @@ manage(Window w, XWindowAttributes *wa)
 		XSetWindowBorder(dpy, w, scheme[SchemeNorm][ColBorder].pixel);
 	#endif // BAR_FLEXWINTITLE_PATCH
 	configure(c); /* propagates border_width, if size doesn't change */
-	#if !FLOATPOS_PATCH
 	updatesizehints(c);
-	#endif // FLOATPOS_PATCH
 	if (getatomprop(c, netatom[NetWMState]) == netatom[NetWMFullscreen])
 		setfullscreen(c, 1);
 	updatewmhints(c);
@@ -2527,7 +2539,7 @@ movemouse(const Arg *arg)
 	if (!(c = selmon->sel))
 		return;
 	#if !FAKEFULLSCREEN_PATCH
-	#if FAKEFULLSCREEN_CLIENT_PATCH
+	#if FAKEFULLSCREEN_CLIENT_PATCH && !FAKEFULLSCREEN_PATCH
 	if (c->isfullscreen && c->fakefullscreen != 1) /* no support moving fullscreen windows by mouse */
 		return;
 	#else
@@ -2791,7 +2803,7 @@ resizeclient(Client *c, int x, int y, int w, int h)
 			 c->mon->nmaster == 0)))
 		#endif //FLEXTILE_DELUXE_LAYOUT
 		)
-		#if FAKEFULLSCREEN_CLIENT_PATCH
+		#if FAKEFULLSCREEN_CLIENT_PATCH && !FAKEFULLSCREEN_PATCH
 		&& (c->fakefullscreen == 1 || !c->isfullscreen)
 		#else
 		&& !c->isfullscreen
@@ -2805,19 +2817,7 @@ resizeclient(Client *c, int x, int y, int w, int h)
 	#endif // NOBORDER_PATCH
 	XConfigureWindow(dpy, c->win, CWX|CWY|CWWidth|CWHeight|CWBorderWidth, &wc);
 	configure(c);
-	#if FAKEFULLSCREEN_CLIENT_PATCH
-	if (c->fakefullscreen == 1)
-		/* Exception: if the client was in actual fullscreen and we exit out to fake fullscreen
-		 * mode, then the focus would drift to whichever window is under the mouse cursor at the
-		 * time. To avoid this we pass True to XSync which will make the X server disregard any
-		 * other events in the queue thus cancelling the EnterNotify event that would otherwise
-		 * have changed focus. */
-		XSync(dpy, True);
-	else
-		XSync(dpy, False);
-	#else
 	XSync(dpy, False);
-	#endif // FAKEFULLSCREEN_CLIENT_PATCH
 }
 
 void
@@ -2983,7 +2983,7 @@ restack(Monitor *m)
 		return;
 	if (m->sel->isfloating || !m->lt[m->sellt]->arrange)
 		XRaiseWindow(dpy, m->sel->win);
-	if (m->lt[m->sellt]->arrange) {
+	if (m->lt[m->sellt]->arrange && m->bar) {
 		wc.stack_mode = Below;
 		wc.sibling = m->bar->win;
 		for (c = m->stack; c; c = c->snext)
@@ -3265,6 +3265,7 @@ setfocus(Client *c)
 void
 setfullscreen(Client *c, int fullscreen)
 {
+	XEvent ev;
 	int savestate = 0, restorestate = 0;
 
 	if ((c->fakefullscreen == 0 && fullscreen && !c->isfullscreen) // normal fullscreen
@@ -3322,6 +3323,13 @@ setfullscreen(Client *c, int fullscreen)
 		restack(c->mon);
 	} else
 		resizeclient(c, c->x, c->y, c->w, c->h);
+
+	/* Exception: if the client was in actual fullscreen and we exit out to fake fullscreen
+	 * mode, then the focus would sometimes drift to whichever window is under the mouse cursor
+	 * at the time. To avoid this we ask X for all EnterNotify events and just ignore them.
+	 */
+	if (!c->isfullscreen)
+		while (XCheckMaskEvent(dpy, EnterWindowMask, &ev));
 }
 #else
 void
@@ -3751,29 +3759,10 @@ spawn(const Arg *arg)
 	#if RIODRAW_PATCH
 	pid_t pid;
 	#endif // RIODRAW_PATCH
-	#if BAR_STATUSCMD_PATCH && !BAR_DWMBLOCKS_PATCH
-	char *cmd = NULL;
-	#endif // BAR_STATUSCMD_PATCH | BAR_DWMBLOCKS_PATCH
 	#if !NODMENU_PATCH
 	if (arg->v == dmenucmd)
 		dmenumon[0] = '0' + selmon->num;
 	#endif // NODMENU_PATCH
-	#if BAR_STATUSCMD_PATCH && !BAR_DWMBLOCKS_PATCH
-	#if !NODMENU_PATCH
-	else if (arg->v == statuscmd)
-	#else
-	if (arg->v == statuscmd)
-	#endif // NODMENU_PATCH
-	{
-		int len = strlen(statuscmds[statuscmdn]) + 1;
-		if (!(cmd = malloc(sizeof(char)*len + sizeof(statusexport))))
-			die("malloc:");
-		strcpy(cmd, statusexport);
-		strcat(cmd, statuscmds[statuscmdn]);
-		cmd[LENGTH(statusexport)-3] = '0' + lastbutton;
-		statuscmd[2] = cmd;
-	}
-	#endif // BAR_STATUSCMD_PATCH | BAR_DWMBLOCKS_PATCH
 
 	#if RIODRAW_PATCH
 	if ((pid = fork()) == 0)
@@ -3783,6 +3772,20 @@ spawn(const Arg *arg)
 	{
 		if (dpy)
 			close(ConnectionNumber(dpy));
+
+		#if BAR_STATUSCMD_PATCH && !BAR_DWMBLOCKS_PATCH
+		if (arg->v == statuscmd) {
+			for (int i = 0; i < LENGTH(statuscmds); i++) {
+				if (statuscmdn == statuscmds[i].id) {
+					statuscmd[2] = statuscmds[i].cmd;
+					setenv("BUTTON", lastbutton, 1);
+					break;
+				}
+			}
+			if (!statuscmd[2])
+				exit(EXIT_SUCCESS);
+		}
+		#endif // BAR_STATUSCMD_PATCH | BAR_DWMBLOCKS_PATCH
 		#if SPAWNCMD_PATCH
 		if (selmon->sel) {
 			const char* const home = getenv("HOME");
@@ -3823,9 +3826,6 @@ spawn(const Arg *arg)
 		perror(" failed");
 		exit(EXIT_SUCCESS);
 	}
-	#if BAR_STATUSCMD_PATCH && !BAR_DWMBLOCKS_PATCH
-	free(cmd);
-	#endif // BAR_STATUSCMD_PATCH | BAR_DWMBLOCKS_PATCH
 	#if RIODRAW_PATCH
 	return pid;
 	#endif // RIODRAW_PATCH
@@ -4149,6 +4149,11 @@ unmanage(Client *c, int destroyed)
 	}
 	#endif // XKB_PATCH
 
+	#if SCRATCHPAD_ALT_1_PATCH
+	if (scratchpad_last_showed == c)
+		scratchpad_last_showed = NULL;
+	#endif // SCRATCHPAD_ALT_1_PATCH
+
 	free(c);
 	#if SWALLOW_PATCH
 	if (s)
@@ -4286,6 +4291,10 @@ updatebarpos(Monitor *m)
 
 	for (bar = m->bar; bar; bar = bar->next) {
 		bar->bx = m->wx + x_pad;
+		#if BAR_ANYBAR_PATCH && !BAR_ANYBAR_MANAGE_WIDTH_PATCH
+		if (bar->external)
+			continue;
+		#endif // BAR_ANYBAR_PATCH | BAR_ANYBAR_MANAGE_WIDTH_PATCH
 		bar->bw = m->ww - 2 * x_pad;
 	}
 
@@ -4318,9 +4327,8 @@ updatebarpos(Monitor *m)
 		if (bar->topbar)
 			m->wy = m->wy + bar->bh + y_pad;
 		m->wh -= y_pad + bar->bh;
-	}
-	for (bar = m->bar; bar; bar = bar->next)
 		bar->by = (bar->topbar ? m->wy - bar->bh : m->wy + m->wh);
+	}
 }
 
 void

@@ -21,12 +21,37 @@
  */
 #define BAR_AWESOMEBAR_PATCH 0
 
-/* This patch depends on statuscmd patch and adds integration with a (patched) dwmblocks
- * instance to give a clickable status bar.
- * Patch: https://gist.github.com/danbyl/54f7c1d57fc6507242a95b71c3d8fdea
+/* This patch depends on statuscmd patch and adds integration with a (patched)
+ * dwmblocks instance to give a clickable status bar. One must not necessarily
+ * have to use dwmblocks for this feature, any status updater that has support
+ * for real-time signals (SIGRTMIN) can be used.
+ *
  * dwmblocks: https://github.com/torrinfail/dwmblocks
+ * https://dwm.suckless.org/patches/statuscmd/
  */
 #define BAR_DWMBLOCKS_PATCH 0
+
+/* Originally the dwmblocks + statuscmd patch used a user defined signal (SIGUSR1)
+ * for communicating with dwmblocks to indicate update signal and what button was
+ * pressed. The signalling was later changed to SIGRTMIN instead.
+ *
+ * Ultimately this makes dwmblocks instances that were patched with the old patch
+ * are incompatible with the new dwm patch and vice versa.
+ *
+ * This is a compatibility patch that makes dwm use SIGUSR1 instead of SIGRTMIN so
+ * if button clicks are not working then you may want to try enabling this.
+ *
+ * If dwmblocks happen to die like this when clicking on a status
+ *
+ *    [1]    54355 user-defined signal 1  dwmblocks
+ *
+ * then it suggests that dwmblocks does not support user defined signals and this
+ * patch should be left disabled.
+ *
+ * Patch: https://gist.github.com/danbyl/54f7c1d57fc6507242a95b71c3d8fdea
+ * https://dwm.suckless.org/patches/statuscmd/
+ */
+#define BAR_DWMBLOCKS_SIGUSR1_PATCH 0
 
 /* This patch shows the titles of all visible windows in the status bar
  * (as opposed to showing only the selected one).
@@ -198,11 +223,17 @@
  * togglebar affect the external bar in the same way.
  *
  * NB: Unless you want both anybar + dwm bar(s) then the recommendation is to disable all
- * bar modules and have { 0 } in the barrules.
+ * bar modules and have { -2 } in the barrules.
  *
  * https://dwm.suckless.org/patches/anybar/
  */
 #define BAR_ANYBAR_PATCH 0
+
+/* Anybar option to place the next bar depending on previous bar's position (top or bottom) */
+#define BAR_ANYBAR_TOP_AND_BOTTOM_BARS_PATCH 0
+
+/* Anybar option to let dwm manage the width of the bar */
+#define BAR_ANYBAR_MANAGE_WIDTH_PATCH 0
 
 /* This patch adds a border around the status bar(s) just like the border of client windows.
  * https://codemadness.org/paste/dwm-border-bar.patch
@@ -800,7 +831,7 @@
 /* This patch adds rounded corners to client windows in dwm.
  * You need to uncomment the corresponding line in config.mk to use the -lXext library
  * when including this patch. You will also want to set "borderpx = 0;" in your config.h.
- * https://github.com/mitchweaver/suckless/blob/master/dwm/patches_mitch/mitch-06-rounded_corners-db6093f6ec1bb884f7540f2512935b5254750b30.patch
+ * https://github.com/mitchweaver/suckless/blob/master/dwm/patches/mitch-06-rounded_corners-f04cac6d6e39cd9e3fc4fae526e3d1e8df5e34b2.patch
  */
 #define ROUNDED_CORNERS_PATCH 0
 

@@ -1,7 +1,7 @@
 #if !BAR_DWMBLOCKS_PATCH
 static const char statusexport[] = "export BUTTON=-;";
 static int statuscmdn;
-static int lastbutton;
+static char lastbutton[] = "-";
 #endif // BAR_DWMBLOCKS_PATCH
 
 int
@@ -25,7 +25,7 @@ click_statuscmd_text(Arg *arg, int rel_x, char *text)
 	int x = 0;
 	char ch;
 	#if BAR_DWMBLOCKS_PATCH
-	dwmblockssig = -1;
+	statussig = -1;
 	#else
 	statuscmdn = 0;
 	#endif // BAR_DWMBLOCKS_PATCH
@@ -42,20 +42,20 @@ click_statuscmd_text(Arg *arg, int rel_x, char *text)
 			text += i+1;
 			i = -1;
 			#if BAR_DWMBLOCKS_PATCH
-			if (x >= rel_x && dwmblockssig != -1)
+			if (x >= rel_x && statussig != -1)
 				break;
-			dwmblockssig = ch;
+			statussig = ch;
 			#else
 			if (x >= rel_x)
 				break;
 			if (ch <= LENGTH(statuscmds))
-				statuscmdn = ch - 1;
+				statuscmdn = ch;
 			#endif // BAR_DWMBLOCKS_PATCH
 		}
 	}
 	#if BAR_DWMBLOCKS_PATCH
-	if (dwmblockssig == -1)
-		dwmblockssig = 0;
+	if (statussig == -1)
+		statussig = 0;
 	#endif // BAR_DWMBLOCKS_PATCH
 	return ClkStatusText;
 }

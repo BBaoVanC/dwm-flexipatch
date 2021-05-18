@@ -11,9 +11,15 @@ Alternatively if you have found the patches you want, but don't want the rest of
 
 Refer to [https://dwm.suckless.org/](https://dwm.suckless.org/) for details on the dwm window manager, how to install it and how it works.
 
+If you are experiencing issues then you may want to check out the [Known Issues](https://github.com/bakkeby/dwm-flexipatch/discussions/categories/known-issues) discussion category.
+
 ---
 
 ### Changelog:
+
+2021-04-16 - Vanitygaps: replaced smartgaps with smartgaps\_fact, allowing gaps to be disabled or increased when there is only one client.
+
+2021-04-14 - Upgraded the dwmblocks patch for statuscmd which changes the signalling mechanism from SIGUSR1 to SIGRTMIN which is likely to cause issues for those that already have a working setup. A compatibility option has been added which changes this back to SIGUSR1. Note that configuration was also changed.
 
 2021-04-07 - Added xkb patch
 
@@ -448,9 +454,10 @@ Refer to [https://dwm.suckless.org/](https://dwm.suckless.org/) for details on t
    - [noborder](https://dwm.suckless.org/patches/noborder/)
       - removes the border when there is only one window visible
 
-   - [nodmenu](https://dwm.suckless.org/patches/nodmenu/)
+   - [nodmenu](https://git.suckless.org/sites/commit/ed68e3629de4ef2ca2d3f8893a79fb570b4c0cbc.html)
       - enable modifying dmenu in config.def.h which resulted previously in a compilation error because two lines of code hardcode dmenu into dwm
       - allows complete removal of dmenu, should you want to do that
+      - NB: this patch was removed from the patches listing on the suckless page due to it's simplicity
 
    - nomodbuttons
       - allows for toggleable client button bindings that have no modifiers

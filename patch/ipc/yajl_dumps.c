@@ -5,13 +5,15 @@
 int
 dump_tag(yajl_gen gen, const char *name, const int tag_mask)
 {
+  if (!name)
+    return 0;
+
   // clang-format off
   YMAP(
     YSTR("bit_mask"); YINT(tag_mask);
     YSTR("name"); YSTR(name);
   )
   // clang-format on
-
   return 0;
 }
 
@@ -149,12 +151,14 @@ dump_monitor(yajl_gen gen, Monitor *mon, int is_selected)
       )
     )
 
-    YSTR("bar"); YMAP(
-      YSTR("y"); YINT(mon->bar->by);
-      YSTR("is_shown"); YBOOL(mon->showbar);
-      YSTR("is_top"); YBOOL(mon->bar->topbar);
-      YSTR("window_id"); YINT(mon->bar->win);
-    )
+    if (mon->bar) {
+      YSTR("bar"); YMAP(
+        YSTR("y"); YINT(mon->bar->by);
+        YSTR("is_shown"); YBOOL(mon->showbar);
+        YSTR("is_top"); YBOOL(mon->bar->topbar);
+        YSTR("window_id"); YINT(mon->bar->win);
+      )
+    }
   )
   // clang-format on
 
