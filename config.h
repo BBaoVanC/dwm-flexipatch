@@ -424,6 +424,7 @@ static const Rule rules[] = {
 	RULE(.class = "Dragon-drag-and-drop", .isfloating = 1, .noswallow = 1)
 	RULE(.title = "Clipboard Editor", .isfloating = 1, .noswallow = 1)
 	RULE(.title = "Event Tester", .noswallow = 1)
+	RULE(.isfakefullscreen = 1)
 
 	#if SCRATCHPADS_PATCH
 	RULE(.instance = "spterm", .tags = SPTAG(0), .isfloating = 1)
