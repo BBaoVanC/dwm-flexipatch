@@ -19,7 +19,7 @@ static const unsigned int gappih         = 10;  /* horiz inner gap between windo
 static const unsigned int gappiv         = 10;  /* vert inner gap between windows */
 static const unsigned int gappoh         = 10;  /* horiz outer gap between windows and screen edge */
 static const unsigned int gappov         = 10;  /* vert outer gap between windows and screen edge */
-static const int smartgaps               = 0;   /* 1 means no outer gap when there is only one window */
+static const int smartgaps_fact          = 1;   /* gap factor when there is only one client; 0 = no gaps, 3 = 3x outer gaps */
 #endif // VANITYGAPS_PATCH
 #if AUTOSTART_PATCH
 static const char autostartblocksh[]     = "autostart_blocking.sh";
@@ -83,7 +83,7 @@ static const int showsystray             = 1;   /* 0 means no systray */
 static int tagindicatortype              = INDICATOR_TOP_LEFT_SQUARE;
 static int tiledindicatortype            = INDICATOR_NONE;
 static int floatindicatortype            = INDICATOR_TOP_LEFT_SQUARE;
-#if FAKEFULLSCREEN_CLIENT_PATCH
+#if FAKEFULLSCREEN_CLIENT_PATCH && !FAKEFULLSCREEN_PATCH
 static int fakefsindicatortype           = INDICATOR_PLUS;
 static int floatfakefsindicatortype      = INDICATOR_PLUS_AND_LARGER_SQUARE;
 #endif // FAKEFULLSCREEN_CLIENT_PATCH
@@ -791,11 +791,21 @@ static const char *dmenucmd[] = {
 };
 static const char *termcmd[]  = { "st", NULL };
 
-#if BAR_STATUSCMD_PATCH && !BAR_DWMBLOCKS_PATCH
+#if BAR_STATUSCMD_PATCH
+#if BAR_DWMBLOCKS_PATCH
+/* This defines the name of the executable that handles the bar (used for signalling purposes) */
+#define STATUSBAR "dwmblocks"
+#else
 /* commands spawned when clicking statusbar, the mouse button pressed is exported as BUTTON */
-static const char *statuscmds[] = { "notify-send Mouse$BUTTON" };
-static char *statuscmd[] = { "/bin/sh", "-c", NULL, NULL };
-#endif // BAR_STATUSCMD_PATCH | DWMBLOCKS_PATCH
+static const StatusCmd statuscmds[] = {
+	{ "notify-send Volume$BUTTON", 1 },
+	{ "notify-send CPU$BUTTON", 2 },
+	{ "notify-send Battery$BUTTON", 3 },
+};
+/* test the above with: xsetroot -name "$(printf '\x01Volume |\x02 CPU |\x03 Battery')" */
+static const char *statuscmd[] = { "/bin/sh", "-c", NULL, NULL };
+#endif // BAR_DWMBLOCKS_PATCH
+#endif // BAR_STATUSCMD_PATCH
 
 #if ON_EMPTY_KEYS_PATCH
 static const char* firefoxcmd[] = {"firefox", NULL};
@@ -1271,12 +1281,12 @@ static Button buttons[] = {
 	#endif // BAR_WINTITLEACTIONS_PATCH
 	{ ClkWinTitle,          0,                   Button2,        zoom,           {0} },
 	#if BAR_STATUSCMD_PATCH && BAR_DWMBLOCKS_PATCH
-	{ ClkStatusText,        0,                   Button1,        sigdwmblocks,   {.i = 1 } },
-	{ ClkStatusText,        0,                   Button2,        sigdwmblocks,   {.i = 2 } },
-	{ ClkStatusText,        0,                   Button3,        sigdwmblocks,   {.i = 3 } },
-	{ ClkStatusText,        ShiftMask,           Button1,        sigdwmblocks,   {.i = 4 } },
-	{ ClkStatusText,        ShiftMask,           Button2,        sigdwmblocks,   {.i = 5 } },
-	{ ClkStatusText,        ShiftMask,           Button3,        sigdwmblocks,   {.i = 6 } },
+	{ ClkStatusText,        0,                   Button1,        sigstatusbar,   {.i = 1 } },
+	{ ClkStatusText,        0,                   Button2,        sigstatusbar,   {.i = 2 } },
+	{ ClkStatusText,        0,                   Button3,        sigstatusbar,   {.i = 3 } },
+	{ ClkStatusText,        ShiftMask,           Button1,        sigstatusbar,   {.i = 4 } },
+	{ ClkStatusText,        ShiftMask,           Button2,        sigstatusbar,   {.i = 5 } },
+	{ ClkStatusText,        ShiftMask,           Button3,        sigstatusbar,   {.i = 6 } },
 	#elif BAR_STATUSCMD_PATCH
 	{ ClkStatusText,        0,                   Button1,        spawn,          {.v = statuscmd } },
 	{ ClkStatusText,        0,                   Button2,        spawn,          {.v = statuscmd } },
