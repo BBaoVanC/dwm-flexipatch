@@ -33,3 +33,5 @@ static const char *clipgimpcmd[] = { "clipgimp", NULL };
 static const char *voltogglecmd[] = { "audioctl", "toggle", NULL };
 static const char *volupcmd[] = { "audioctl", "up", NULL };
 static const char *voldowncmd[] = { "audioctl", "down", NULL };
+static const char *volup1cmd[] = { "audioctl", "up", "1", NULL };
+static const char *voldown1cmd[] = { "audioctl", "down", "1", NULL };

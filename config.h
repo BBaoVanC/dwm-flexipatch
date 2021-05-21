@@ -1229,6 +1229,8 @@ static Key keys[] = {
         { 0,                      XF86XK_AudioMute, spawn,  { .v = voltogglecmd } },
         { 0,               XF86XK_AudioRaiseVolume, spawn,  { .v = volupcmd } },
         { 0,               XF86XK_AudioLowerVolume, spawn,  { .v = voldowncmd } },
+        { ShiftMask,       XF86XK_AudioRaiseVolume, spawn,  { .v = volup1cmd } },
+        { ShiftMask,       XF86XK_AudioLowerVolume, spawn,  { .v = voldown1cmd } },
 };
 
 #if KEYMODES_PATCH
