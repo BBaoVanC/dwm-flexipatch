@@ -421,9 +421,9 @@ static const Rule rules[] = {
 	RULE(.wintype = WTYPE "TOOLBAR", .isfloating = 1) 
 	RULE(.wintype = WTYPE "SPLASH", .isfloating = 1) 
 
-	RULE(.class = "st", .isterminal = 1)
-	RULE(.class = "st-noswallow", .noswallow = 1)
-	RULE(.class = "st-floating", .isfloating = 1)
+	RULE(.class = "kitty", .isterminal = 1)
+	RULE(.class = "kitty-noswallow", .noswallow = 1)
+	RULE(.class = "kitty-floating", .isfloating = 1)
 	RULE(.class = "Steam", .instance = "Steam", .title = "Steam - News", .isfloating = 1)
 	RULE(.class = "Steam", .instance = "Steam", .title = "Friends List", .isfloating = 1)
 	RULE(.class = "Dragon-drag-and-drop", .isfloating = 1, .noswallow = 1)
