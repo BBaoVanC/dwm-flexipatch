@@ -9,10 +9,9 @@ static const char *clipeditcmd[] = { "clipedit", NULL };
 static const char *browsercmd[] = { "firefox-nightly", NULL };
 static const char *discordcmd[] = { "discord-canary", NULL };
 static const char *elementcmd[] = { "element-desktop", "--disable-smooth-scrolling", NULL };
-static const char *mailclientcmd[] = { "kitty", "thunderbird", NULL };
+static const char *mailclientcmd[] = { "thunderbird", NULL };
 static const char *filemanagercmd[] = { "kitty", "ranger", NULL };
 static const char *rssreadercmd[] = { "kitty", "newsboat", NULL };
-static const char *passmenucmd[] = { "passmenu", NULL };
 
 static const char *dunstclosecmd[] = { "dunstctl", "close", NULL };
 static const char *dunstcloseallcmd[] = { "dunstctl", "close-all", NULL };
