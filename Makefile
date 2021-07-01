@@ -23,7 +23,7 @@ options:
 .c.o:
 	${CC} -c ${CFLAGS} $<
 
-${OBJ}: config.h config.mk patches.h
+${OBJ}: config.h config.mk patches.h keybind_commands.h
 
 config.h:
 	cp config.def.h $@
