@@ -1209,6 +1209,7 @@ static Key keys[] = {
         { Mod4Mask,                     XK_c,       spawn,  { .v = clipeditcmd } },
         { Mod4Mask,                     XK_f,       spawn,  { .v = browsercmd } },
         { Mod4Mask,                     XK_d,       spawn,  { .v = discordcmd } },
+        { Mod4Mask,                     XK_e,       spawn,  { .v = elementcmd } },
         { Mod4Mask,                     XK_m,       spawn,  { .v = mailclientcmd } },
         { Mod4Mask,                     XK_r,       spawn,  { .v = filemanagercmd } },
         { Mod4Mask,                     XK_n,       spawn,  { .v = rssreadercmd } },
