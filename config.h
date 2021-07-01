@@ -1213,7 +1213,6 @@ static Key keys[] = {
         { Mod4Mask,                     XK_m,       spawn,  { .v = mailclientcmd } },
         { Mod4Mask,                     XK_r,       spawn,  { .v = filemanagercmd } },
         { Mod4Mask,                     XK_n,       spawn,  { .v = rssreadercmd } },
-        { Mod4Mask,                     XK_p,       spawn,  { .v = passmenucmd } },
 
         { Mod4Mask,                     XK_Escape,  spawn,  { .v = dunstclosecmd } },
         { Mod4Mask|ShiftMask,           XK_Escape,  spawn,  { .v = dunstcloseallcmd } },
