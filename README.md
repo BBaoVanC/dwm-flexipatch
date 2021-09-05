@@ -1,4 +1,4 @@
-This dwm 6.2 (67d76b, 2021-03-29) side project has a different take on dwm patching. It uses preprocessor directives to decide whether or not to include a patch during build time. Essentially this means that this build, for better or worse, contains both the patched _and_ the original code. The aim being that you can select which patches to include and the build will contain that code and nothing more. Due to the complexity of some of the patches dwm-flexipatch has diverged from mainstream dwm by making some core patches non-optional for maintenance reasons. For the classic dwm-flexipatch build refer to branch [dwm-flexipatch-1.0](https://github.com/bakkeby/dwm-flexipatch/tree/dwm-flexipatch-1.0).
+This dwm 6.2 (67d76bd, 2021-03-29) side project has a different take on dwm patching. It uses preprocessor directives to decide whether or not to include a patch during build time. Essentially this means that this build, for better or worse, contains both the patched _and_ the original code. The aim being that you can select which patches to include and the build will contain that code and nothing more. Due to the complexity of some of the patches dwm-flexipatch has diverged from mainstream dwm by making some core patches non-optional for maintenance reasons. For the classic dwm-flexipatch build refer to branch [dwm-flexipatch-1.0](https://github.com/bakkeby/dwm-flexipatch/tree/dwm-flexipatch-1.0).
 
 For example to include the `alpha` patch then you would only need to flip this setting from 0 to 1 in [patches.h](https://github.com/bakkeby/dwm-flexipatch/blob/master/patches.def.h):
 ```c
@@ -16,6 +16,8 @@ If you are experiencing issues then you may want to check out the [Known Issues]
 ---
 
 ### Changelog:
+
+2021-07-27 - Added the winicon patch
 
 2021-05-30 - Added togglelayout and toggletag patches
 
@@ -758,6 +760,9 @@ If you are experiencing issues then you may want to check out the [Known Issues]
    - [warp](https://dwm.suckless.org/patches/warp/)
       - warps the mouse cursor to the center of the currently focused window or screen when the
         mouse cursor is (a) on a different screen or (b) on top of a different window
+
+   - [winicon](https://dwm.suckless.org/patches/winicon/)
+      - adds the window icon next to the window title in the bar
 
    - [windowrolerule](https://github.com/bakkeby/patches/wiki/windowrolerule/)
       - sometimes a single application opens different windows depending on the task at hand and
