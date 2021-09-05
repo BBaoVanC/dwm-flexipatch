@@ -53,6 +53,10 @@ static const int bar_height              = 0;   /* 0 means derive from font, >= 
 static const int vertpad                 = 10;  /* vertical padding of bar */
 static const int sidepad                 = 10;  /* horizontal padding of bar */
 #endif // BAR_PADDING_PATCH
+#if BAR_WINICON_PATCH
+#define ICONSIZE 20    /* icon size */
+#define ICONSPACING 5  /* space between icon and title */
+#endif // BAR_WINICON_PATCH
 #if FOCUSONCLICK_PATCH
 static const int focusonwheel            = 0;
 #endif // FOCUSONCLICK_PATCH
@@ -490,7 +494,11 @@ static const BarRule barrules[] = {
 	#if BAR_LTSYMBOL_PATCH
 	{ -1,       0,     BAR_ALIGN_LEFT,   width_ltsymbol,          draw_ltsymbol,          click_ltsymbol,          "layout" },
 	#endif // BAR_LTSYMBOL_PATCH
-	#if BAR_STATUS2D_PATCH && BAR_STATUSCMD_PATCH
+	#if BAR_STATUSCOLORS_PATCH && BAR_STATUSCMD_PATCH
+	{ 'A',      0,     BAR_ALIGN_RIGHT,  width_statuscolors,      draw_statuscolors,      click_statuscmd,         "statuscolors" },
+	#elif BAR_STATUSCOLORS_PATCH
+	{ 'A',      0,     BAR_ALIGN_RIGHT,  width_statuscolors,      draw_statuscolors,      click_statuscolors,      "statuscolors" },
+	#elif BAR_STATUS2D_PATCH && BAR_STATUSCMD_PATCH
 	{ 'A',      0,     BAR_ALIGN_RIGHT,  width_status2d,          draw_status2d,          click_statuscmd,         "status2d" },
 	#elif BAR_STATUS2D_PATCH
 	{ 'A',      0,     BAR_ALIGN_RIGHT,  width_status2d,          draw_status2d,          click_status2d,          "status2d" },
@@ -517,7 +525,11 @@ static const BarRule barrules[] = {
 	{ -1,       0,     BAR_ALIGN_NONE,   width_wintitle,          draw_wintitle,          click_wintitle,          "wintitle" },
 	#endif // BAR_TABGROUPS_PATCH | BAR_AWESOMEBAR_PATCH | BAR_FANCYBAR_PATCH | BAR_WINTITLE_PATCH
 	#if BAR_EXTRASTATUS_PATCH
-	#if BAR_STATUS2D_PATCH && BAR_STATUSCMD_PATCH
+	#if BAR_STATUSCOLORS_PATCH && BAR_STATUSCMD_PATCH
+	{ 'A',      1,     BAR_ALIGN_CENTER, width_statuscolors_es,   draw_statuscolors_es,   click_statuscmd_es,      "statuscolors_es" },
+	#elif BAR_STATUSCOLORS_PATCH
+	{ 'A',      1,     BAR_ALIGN_CENTER, width_statuscolors_es,   draw_statuscolors_es,   click_statuscolors,      "statuscolors_es" },
+	#elif BAR_STATUS2D_PATCH && BAR_STATUSCMD_PATCH
 	{ 'A',      1,     BAR_ALIGN_CENTER, width_status2d_es,       draw_status2d_es,       click_statuscmd_es,      "status2d_es" },
 	#elif BAR_STATUS2D_PATCH
 	{ 'A',      1,     BAR_ALIGN_CENTER, width_status2d_es,       draw_status2d_es,       click_status2d,          "status2d_es" },
@@ -1671,3 +1683,4 @@ static IPCCommand ipccommands[] = {
 	#endif // XRDB_PATCH
 };
 #endif // IPC_PATCH
+

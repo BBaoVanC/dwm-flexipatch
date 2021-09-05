@@ -155,6 +155,24 @@
 /* Show tag symbols in bar */
 #define BAR_TAGS_PATCH 1
 
+/* This patch adds the window icon next to the window title in the bar.
+ *
+ * The patch depends on Imlib2 for icon scaling.
+ * You need to uncomment the corresponding line in config.mk to use the -lImlib2 library
+ *
+ * Arch Linux:
+ *     sudo pacman -S imlib2
+ * Debian:
+ *     sudo apt install libimlib2-dev
+ *
+ * The author recommends adding the compiler flags of -O3 and -march=native to enable auto loop
+ * vectorize for better performance.
+ *
+ * https://github.com/AdamYuan/dwm-winicon
+ * https://dwm.suckless.org/patches/winicon
+ */
+#define BAR_WINICON_PATCH 0
+
 /* Show window title in bar */
 #define BAR_WINTITLE_PATCH 1
 
@@ -343,6 +361,10 @@
 /* This patch enables colored text in the status bar. It changes the way colors are defined
  * in config.h allowing multiple color combinations for use in the status script.
  * This patch is incompatible with and takes precedence over the status2d patch.
+ *
+ * This patch is compatible with the statuscmd patch with the caveat that the first 16 markers
+ * are reserved for status colors restricting block signals to 17 through 31.
+ *
  * https://dwm.suckless.org/patches/statuscolors/
  */
 #define BAR_STATUSCOLORS_PATCH 0
@@ -1257,3 +1279,4 @@
  * This can be optionally disabled in favour of other layouts.
  */
 #define MONOCLE_LAYOUT 1
+
