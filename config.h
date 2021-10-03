@@ -1231,8 +1231,8 @@ static Key keys[] = {
         { Mod4Mask,                     XK_u,       spawn,  { .v = imupdragcmd } },
         { Mod4Mask|ShiftMask,           XK_u,       spawn,  { .v = imupclipcmd } },
 
-        { Mod4Mask|MODKEY,              XK_z,       spawn,  { .v = uskbdcmd } },
-        { Mod4Mask|MODKEY,              XK_x,       spawn,  { .v = intlkbdcmd } },
+        { Mod4Mask|MODKEY,              XK_z,       spawn,  { .v = intlkbdcmd } },
+        { Mod4Mask|MODKEY,              XK_x,       spawn,  { .v = uskbdcmd } },
 
         { 0,                            XK_Print,   spawn,  { .v = ss_sel } },
         { ControlMask,                  XK_Print,   spawn,  { .v = ss_window } },
