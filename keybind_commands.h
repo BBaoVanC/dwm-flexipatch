@@ -18,8 +18,7 @@ static const char *dunstcloseallcmd[] = { "dunstctl", "close-all", NULL };
 static const char *dunsthistorycmd[] = { "dunstctl", "history-pop", NULL };
 static const char *dunstcontextcmd[] = { "dunstctl", "context", NULL };
 
-static const char *imupdragcmd[] = { "imupdrag", "url", NULL };
-static const char *imupclipcmd[] = { "imupclip", "url", NULL };
+static const char *linxclipcmd[] = { "linxclip", NULL };
 
 static const char *intlkbdcmd[] = { "/bin/sh", "-c", "setxkbmap -layout us -variant altgr-intl && sigdwmblocks 2", NULL };
 static const char *uskbdcmd[] = { "/bin/sh", "-c", "setxkbmap -layout us && sigdwmblocks 2", NULL };

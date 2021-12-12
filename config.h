@@ -1228,8 +1228,7 @@ static Key keys[] = {
         { Mod4Mask,                     XK_grave,   spawn,  { .v = dunsthistorycmd } },
         { Mod4Mask|ShiftMask,           XK_period,  spawn,  { .v = dunstcontextcmd } },
 
-        { Mod4Mask,                     XK_u,       spawn,  { .v = imupdragcmd } },
-        { Mod4Mask|ShiftMask,           XK_u,       spawn,  { .v = imupclipcmd } },
+        { Mod4Mask|ShiftMask,           XK_u,       spawn,  { .v = linxclipcmd } },
 
         { Mod4Mask|MODKEY,              XK_z,       spawn,  { .v = intlkbdcmd } },
         { Mod4Mask|MODKEY,              XK_x,       spawn,  { .v = uskbdcmd } },
